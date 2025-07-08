@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unsealing - Famine's Awakening</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0f0f 50%, #2d1616 100%);
+            min-height: 100vh;
+            color: #f5d5a3;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .top-nav {
+            position: relative;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-home {
+            color: #f5d5a3;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #ff6b35;
+            border-radius: 25px;
+            background: rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-home:hover {
+            background: rgba(255, 107, 53, 0.3);
+            transform: translateX(-3px);
+        }
+
+        .page-navigation {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-btn {
+            color: #f5d5a3;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            border-radius: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 3rem 0 2rem 0;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px rgba(255, 107, 53, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(255, 107, 53, 0.8); }
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .opening-prophecy {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(216, 67, 21, 0.1) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.4);
+            margin: 2rem 0 4rem 0;
+            text-align: center;
+        }
+
+        .prophecy-verse {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #ffcc9a;
+            line-height: 1.8;
+        }
+
+        .verse-reference {
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            color: #ff6b35;
+            font-size: 2rem;
+            margin: 3rem 0 2rem 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .daniel-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            margin: 3rem 0;
+        }
+
+        .calculations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .calculation-card {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .calculation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .calc-title {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .calc-formula {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            color: #ffcc9a;
+            text-align: center;
+        }
+
+        .calc-timeline {
+            color: #ff8a65;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .generation-focus {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #ff6b35;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .gen-title {
+            color: #ff6b35;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .convergence-timeline {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(216, 67, 21, 0.1) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            margin: 3rem 0;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .timeline-event {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            text-align: center;
+        }
+
+        .event-date {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .event-name {
+            color: #ffcc9a;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .unsealing-revelation {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.4);
+            margin: 4rem 0;
+        }
+
+        .wisdom-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .mathematical-precision {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            margin: 2rem 0;
+        }
+
+        .math-highlight {
+            color: #ff8a65;
+            font-weight: bold;
+            background: rgba(255, 107, 53, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(216, 67, 21, 0.1) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #d84315 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .prophecy-verse {
+                font-size: 1.2rem;
+            }
+
+            .daniel-section, .opening-prophecy, .generation-focus {
+                padding: 2rem;
+            }
+
+            .calculations-grid, .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gen-title {
+                font-size: 1.8rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .page-navigation {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .nav-btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-home">← Home</a>
+            <div class="page-navigation">
+                <a href="revelation.html" class="nav-btn">The Revelation</a>
+                <a href="glimpse.html" class="nav-btn">Sacred Glimpse</a>
+                <a href="receive.html" class="nav-btn">Receive the Word</a>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="header">
+        <h1 class="page-title">THE UNSEALING</h1>
+        <p class="page-subtitle">Daniel's Sealed Prophecies Revealed to This Generation</p>
+    </header>
+
+    <main class="main-content">
+        <div class="opening-prophecy">
+            <div class="prophecy-verse">
+                "But thou, O Daniel, shut up the words, and seal the book, even to the time of the end: many shall run to and fro, and knowledge shall be increased."
+            </div>
+            <div class="verse-reference">Daniel 12:4</div>
+        </div>
+
+        <section class="daniel-section">
+            <h2 class="section-title">The Hour of Mathematical Convergence</h2>
+            <p style="font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">
+                The prophet Daniel stood at the banks of time's river, receiving visions so mathematically precise that they required sealing until technology could assist in their interpretation. What Daniel could not understand in his generation now breaks open with crystalline clarity through the very people who have been systematically oppressed yet divinely preserved.
+            </p>
+
+            <div class="wisdom-quote">
+                "And he said, Go thy way, Daniel: for the words are closed up and sealed till the time of the end. Many shall be purified, and made white, and tried; but the wicked shall do wickedly: and none of the wicked shall understand; but the wise shall understand."
+                <div style="text-align: right; margin-top: 1rem; color: #ff6b35; font-weight: bold;">- Daniel 12:9-10</div>
+            </div>
+
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                The wise of this generation—those purified through systematic oppression and made white through the fire of trial—now receive what was hidden from previous generations. Your suffering was not random but calculated preparation for this mathematical revelation. These calculations arrive not as mere prophecy but as activation protocol.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="section-title">Four Divine Calculations Converging</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
+                Four distinct mathematical sequences emerge from Daniel's sealed prophecies, each calibrated to converge in this specific season when the Lost-Found Nation reaches spiritual maturity.
+            </p>
+
+            <div class="calculations-grid">
+                <div class="calculation-card">
+                    <div class="calc-title">Sanctuary Cleansing</div>
+                    <div class="calc-formula">2,300 evenings and mornings = 1,150 days</div>
+                    <div class="calc-timeline">June 18, 2025 → August 11, 2028</div>
+                    <p>The contamination of truth that has poisoned every system of knowledge and communication faces systematic purification. Search engines fail to suppress truth, algorithms lose manipulative power, narratives collapse under exposed contradiction.</p>
+                </div>
+
+                <div class="calculation-card">
+                    <div class="calc-title">Time of Trouble</div>
+                    <div class="calc-formula">"Time, times, and half a time" = 1,260 days</div>
+                    <div class="calc-timeline">July 10, 2025 → December 21, 2028</div>
+                    <p>The scattering reaches mathematical completion. Yet this period activates supernatural preservation protocols, positioning awakened vessels precisely where they will be needed when the transition completes.</p>
+                </div>
+
+                <div class="calculation-card">
+                    <div class="calc-title">Governmental Transition</div>
+                    <div class="calc-formula">Daily sacrifice removal = 1,290 days</div>
+                    <div class="calc-timeline">July 10, 2025 → January 20, 2029</div>
+                    <p>The systematic extraction that feeds Babylon's systems faces dismantling. The countdown leads precisely to Presidential Inauguration Day—marking divine administration through awakened vessels.</p>
+                </div>
+
+                <div class="calculation-card">
+                    <div class="calc-title">Blessed Completion</div>
+                    <div class="calc-formula">Complete transformation cycle = 1,335 days</div>
+                    <div class="calc-timeline">May 27, 2025 → January 20, 2029</div>
+                    <p>"Blessed is he that waiteth"—from initial awakening consciousness to full manifestation of divine authority through those who endured the complete cycle of systematic oppression.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="generation-focus">
+            <h2 class="gen-title">Generation X: The Mathematical Witnesses</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Born between 1965-1980, this generation occupies the precise intersection of analog foundation and digital capability, creating the cognitive bridge necessary to decode sealed prophecies.
+            </p>
+            
+            <div class="mathematical-precision">
+                <p style="margin-bottom: 1.5rem;">
+                    <span class="math-highlight">Mathematical Foundation:</span> Generation X witnessed the transition from mechanical calculation to digital processing, creating cognitive flexibility that enables pattern recognition across multiple dimensional planes.
+                </p>
+                <p style="margin-bottom: 1.5rem;">
+                    <span class="math-highlight">Spiritual Authority:</span> This generation experienced every form of institutional betrayal, creating immunity to artificial authority while preserving reverence for authentic divine revelation.
+                </p>
+                <p>
+                    <span class="math-highlight">Divine Timing:</span> They reach spiritual maturity precisely as Daniel's sealed calculations activate—their peak years (ages 45-60 during 2025-2029) align mathematically with prophetic implementation requirements.
+                </p>
+            </div>
+        </section>
+
+        <section class="convergence-timeline">
+            <div class="timeline-header">
+                <h2 class="section-title">The Convergence Timeline</h2>
+                <p style="font-size: 1.1rem;">
+                    Mathematical convergence creates timeline so precise that random chance becomes mathematically impossible. Every date, every sequence, every overlapping calculation points toward divine orchestration.
+                </p>
+            </div>
+
+            <div class="timeline-grid">
+                <div class="timeline-event">
+                    <div class="event-date">2025</div>
+                    <div class="event-name">Activation Point</div>
+                    <div class="event-description">Three of Daniel's four sequences initiate simultaneously. Spiritual preparation accelerates, awakening reaches critical mass.</div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="event-date">2026-2027</div>
+                    <div class="event-name">System Testing</div>
+                    <div class="event-description">Every foundation faces examination. Alternative systems emerge through awakened vessels prepared according to divine protocol.</div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="event-date">2028</div>
+                    <div class="event-name">Peak Convergence</div>
+                    <div class="event-description">All sequences overlap. Babylon's collapse becomes inevitable. Divine alternatives activate through prepared vessels.</div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="event-date">2029</div>
+                    <div class="event-name">Authority Transfer</div>
+                    <div class="event-description">Mathematical completion establishes new realities. Divine administration through those who endured complete systematic opposition.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="unsealing-revelation">
+            <h2 class="section-title">Why Now? Why This Generation?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                The unsealing occurs now because this specific generation possesses what no previous generation contained: the mathematical literacy born of digital immersion, the spiritual authority forged through systematic oppression, and the prophetic timing that transforms calculation into manifestation.
+            </p>
+
+            <div class="wisdom-quote">
+                "And many of them that sleep in the dust of the earth shall awake, some to everlasting life, and some to shame and everlasting contempt. And they that be wise shall shine as the brightness of the firmament; and they that turn many to righteousness as the stars for ever and ever."
+                <div style="text-align: right; margin-top: 1rem; color: #ff6b35; font-weight: bold;">- Daniel 12:2-3</div>
+            </div>
+
+            <p style="font-size: 1.1rem; text-align: center; font-style: italic; margin-top: 2rem;">
+                <strong>This awakening occurs not randomly but through specific generational positioning that enables spiritual discernment of mathematical precision.</strong> The ability to "run to and fro" through information—prophesied as a sign of the end times—manifests through this generation's intuitive navigation of digital information systems while maintaining spiritual foundation to understand what remains hidden to the wicked.
+            </p>
+        </section>
+
+        <section class="cta-section">
+            <h2 class="section-title">The Complete Unsealing Awaits</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                These mathematical revelations represent just the foundation of the complete unsealing contained within <em>Famine's Awakening</em>. The full 105,000-word transmission provides detailed implementation protocols for each prophetic phase.
+            </p>
+            <p style="margin-bottom: 2rem;">
+                <strong>Daniel was told "go thy way till the end be: for thou shalt rest, and stand in thy lot at the end of the days."</strong> You are called to your appointed place in this final season.
+            </p>
+            <a href="receive.html" class="cta-button">Receive the Complete Unsealing</a>
+        </section>
+    </main>
+
+    <script>
+        // Create stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 150;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+        });
+    </script>
+</body>
+</html>
