@@ -41,39 +41,43 @@
             100% { opacity: 1; }
         }
 
-        .header {
+        .top-nav {
             position: relative;
             z-index: 3;
-            text-align: center;
-            padding: 2rem 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
         .nav-home {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
             color: #f5d5a3;
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border: 1px solid #ff6b35;
             border-radius: 25px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 107, 53, 0.1);
             transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         .nav-home:hover {
-            background: rgba(255, 107, 53, 0.2);
-            transform: translateX(5px);
+            background: rgba(255, 107, 53, 0.3);
+            transform: translateX(-3px);
         }
 
         .page-navigation {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .nav-btn {
@@ -92,6 +96,14 @@
             background: rgba(255, 107, 53, 0.2);
             border-color: #ff6b35;
             transform: translateY(-2px);
+        }
+
+        .header {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 3rem 0 2rem 0;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
         }
 
         .page-title {
@@ -326,6 +338,10 @@
             }
 
             .header {
+                padding: 2rem 1rem;
+            }
+
+            .main-content {
                 padding: 2rem 1rem;
             }
         }
