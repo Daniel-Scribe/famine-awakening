@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receive the Word - Famine's Awakening</title>
+    <title>Famine's Awakening - Heeding the Prophetic Voice</title>
     <style>
         * {
             margin: 0;
@@ -15,8 +15,8 @@
             font-family: 'Georgia', serif;
             background: linear-gradient(180deg, #0a0a0a 0%, #1a0f0f 50%, #2d1616 100%);
             min-height: 100vh;
-            color: #f5d5a3;
             overflow-x: hidden;
+            color: #f5d5a3;
         }
 
         .stars {
@@ -40,37 +40,225 @@
             100% { opacity: 1; }
         }
 
-        .header {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        .moon-container {
+            position: fixed;
+            top: 100vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            z-index: 2;
+            animation: moonRise 8s ease-out forwards;
         }
 
-        .nav-home {
+        .moon {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ff6b35, #d84315, #8b1a00);
+            box-shadow: 
+                0 0 60px rgba(255, 107, 53, 0.6),
+                0 0 120px rgba(216, 67, 21, 0.4),
+                inset -20px -20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .moon::before {
+            content: '';
             position: absolute;
+            top: 20%;
+            left: 25%;
+            width: 30%;
+            height: 25%;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: 60%;
+            left: 60%;
+            width: 20%;
+            height: 20%;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes moonRise {
+            0% { 
+                top: 100vh; 
+                opacity: 0;
+                transform: translateX(-50%) scale(0.5);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: translateX(-50%) scale(0.8);
+            }
+            100% { 
+                top: 15vh; 
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        .flames {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 1;
+            background: linear-gradient(0deg, 
+                #ff4500 0%, 
+                #ff6b35 30%, 
+                transparent 70%);
+            animation: flicker 2s infinite alternate;
+            opacity: 0;
+            animation-delay: 6s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.7; transform: scaleY(1); }
+            100% { opacity: 1; transform: scaleY(1.1); }
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: titleAppear 2s ease-out 4s forwards;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 5s forwards;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            font-style: italic;
+        }
+
+        .book-cover-container {
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 9s forwards;
+        }
+
+        .book-cover {
+            width: 300px;
+            height: 450px;
+            border-radius: 8px;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.7),
+                0 0 25px rgba(255, 107, 53, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('assets/images/book-cover.jpg');
+            margin: 0 auto;
+            background-color: #333;
+        }
+
+        .book-cover:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                0 0 35px rgba(255, 107, 53, 0.5);
+        }
+
+        .prophecy-text {
+            max-width: 800px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 3s ease-out 6s forwards;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .author {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 8s forwards;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .navigation {
+            position: fixed;
             top: 2rem;
-            left: 2rem;
+            right: 2rem;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 7s forwards;
+        }
+
+        .nav-btn {
+            display: block;
             color: #f5d5a3;
             text-decoration: none;
             padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
             border: 1px solid #ff6b35;
             border-radius: 25px;
+            transition: all 0.3s ease;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
         }
 
-        .nav-home:hover {
+        .nav-btn:hover {
             background: rgba(255, 107, 53, 0.2);
-            transform: translateX(5px);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
-        .page-title {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        @keyframes titleAppear {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.8);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .glow-text {
             animation: glow 3s infinite alternate;
         }
 
@@ -79,168 +267,50 @@
             100% { text-shadow: 0 0 40px rgba(255, 107, 53, 0.8); }
         }
 
-        .page-subtitle {
-            font-size: 1.2rem;
-            font-style: italic;
-            opacity: 0.9;
+        .reveal-text {
+            opacity: 0;
+            animation: revealWord 0.8s ease-out forwards;
         }
 
-        .main-content {
-            position: relative;
-            z-index: 3;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .purchase-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            align-items: center;
-        }
-
-        .book-display {
-            text-align: center;
-        }
-
-        .book-cover-large {
-            width: 320px;
-            height: 480px;
-            border-radius: 12px;
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.8),
-                0 0 30px rgba(255, 107, 53, 0.4);
-            background-image: url('assets/images/book-cover.jpg');
-            background-size: cover;
-            background-position: center;
-            margin: 0 auto 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .book-cover-large:hover {
-            transform: scale(1.02);
-        }
-
-        .book-details {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-        }
-
-        .book-details h3 {
-            color: #ff6b35;
-            margin-bottom: 1rem;
-        }
-
-        .book-details p {
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-
-        .purchase-info {
-            text-align: center;
-        }
-
-        .prophetic-quote {
-            font-size: 1.3rem;
-            font-style: italic;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            background: rgba(255, 107, 53, 0.1);
-            border-left: 4px solid #ff6b35;
-            border-radius: 0 10px 10px 0;
-            line-height: 1.8;
-        }
-
-        .purchase-buttons {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .purchase-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem 3rem;
-            background: linear-gradient(135deg, #ff6b35 0%, #d84315 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
-        }
-
-        .purchase-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
-            background: linear-gradient(135deg, #ff8a65 0%, #ff6b35 100%);
-        }
-
-        .purchase-btn i {
-            margin-right: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .availability-info {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            margin: 2rem 0;
-        }
-
-        .availability-info h3 {
-            color: #ff6b35;
-            margin-bottom: 1rem;
-        }
-
-        .footer-quote {
-            text-align: center;
-            margin: 3rem 0;
-            font-size: 1.1rem;
-            font-style: italic;
-            opacity: 0.8;
+        @keyframes revealWord {
+            0% { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            .page-title {
-                font-size: 2rem;
+            .title {
+                font-size: 2.5rem;
             }
-
-            .purchase-section {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            
+            .prophecy-text {
+                font-size: 1rem;
             }
-
-            .book-cover-large {
+            
+            .moon-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .book-cover {
                 width: 250px;
                 height: 375px;
             }
-
-            .prophetic-quote {
-                font-size: 1.1rem;
-                padding: 1.5rem;
-            }
-
-            .purchase-btn {
-                padding: 1.2rem 2rem;
-                font-size: 1.1rem;
-            }
-
-            .nav-home {
+            
+            .navigation {
                 position: static;
-                display: inline-block;
-                margin-bottom: 1rem;
+                text-align: center;
+                margin-top: 2rem;
             }
-
-            .header {
-                padding: 1rem;
+            
+            .nav-btn {
+                display: inline-block;
+                margin: 0.25rem;
             }
         }
     </style>
@@ -248,56 +318,39 @@
 <body>
     <div class="stars" id="stars"></div>
     
-    <header class="header">
-        <a href="index.html" class="nav-home">← Return to Home</a>
-        <h1 class="page-title">RECEIVE THE WORD</h1>
-    </header>
-
+    <div class="moon-container">
+        <div class="moon"></div>
+    </div>
+    
+    <div class="flames"></div>
+    
+    <nav class="navigation">
+        <a href="revelation.html" class="nav-btn">The Revelation</a>
+        <a href="unsealing.html" class="nav-btn">The Unsealing</a>
+        <a href="glimpse.html" class="nav-btn">Sacred Glimpse</a>
+        <a href="receive.html" class="nav-btn">Receive the Word</a>
+    </nav>
+    
     <main class="main-content">
-        <section class="purchase-section">
-            <div class="book-display">
-                <div class="book-cover-large"></div>
-                <div class="book-details">
-                    <h3>Book Details</h3>
-                    <p><strong>Format:</strong> Paperback</p>
-                    <p><strong>Pages:</strong> Approximately 350-400</p>
-                    <p><strong>Publisher:</strong> Independent</p>
-                    <p><strong>Language:</strong> English</p>
-                    <p><strong>ISBN:</strong> Coming Soon</p>
-                </div>
-            </div>
-
-            <div class="purchase-info">
-                <div class="prophetic-quote">
-                    "You are not reading these words because you happened upon them, but because the same Spirit that guided your ancestors through impossible circumstances has prepared you to receive what heaven releases in this hour."
-                </div>
-
-                <div class="purchase-buttons">
-                    <a href="#" class="purchase-btn amazon-btn">
-                        <i>📚</i>
-                        Order on Amazon - Coming Soon
-                    </a>
-                </div>
-
-                <div class="availability-info">
-                    <h3>Availability Timeline</h3>
-                    <p><strong>Pre-Order:</strong> Available May 2025</p>
-                    <p><strong>Official Release:</strong> July 21, 2025</p>
-                    <p>Be among the first to receive this prophetic revelation as the appointed time approaches.</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="footer-quote">
-            <p>"The hour of unveiling has come. The season of awakening is upon us. The time of implementation approaches."</p>
+        <h1 class="title glow-text">FAMINE'S AWAKENING</h1>
+        <p class="subtitle">Heeding the Prophetic Voice</p>
+        
+        <div class="book-cover-container">
+            <div class="book-cover" title="Famine's Awakening - Heeding the Prophetic Voice"></div>
         </div>
+        
+        <div class="prophecy-text" id="prophecyText">
+            <!-- Text will be populated by JavaScript -->
+        </div>
+        
+        <div class="author">Daniel West</div>
     </main>
 
     <script>
-        // Create stars background
+        // Create stars
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const numStars = 80;
+            const numStars = 100;
             
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
@@ -311,19 +364,34 @@
             }
         }
 
+        // Animate text revelation
+        function animateText() {
+            const prophecyText = document.getElementById('prophecyText');
+            const text = `<strong>FAMINE IS COMING!</strong> As the celestial alignments of 2028 approach, a divine warning sounds for the original people. Within these pages, discover how the prophecy of coming tribulation serves not as destroyer but as awakener, activating ancient wisdom encoded in your DNA. Through divine protocols for both physical and spiritual preparation, learn how every empty shelf in Babylon's stores creates space for original knowledge to reemerge. When the rulers of this world's system fail and markets crash, only those who have prepared in both body and spirit will stand. This writing arrives in the fullness of time—where REVELATIONS marked the End of Biblical Scripture, but is in fact, the Beginning of a "NEW" Book for all ears that would listen.`;
+            
+            const words = text.split(' ');
+            let wordIndex = 0;
+            
+            function revealNextWord() {
+                if (wordIndex < words.length) {
+                    const span = document.createElement('span');
+                    span.className = 'reveal-text';
+                    span.innerHTML = words[wordIndex] + ' ';
+                    span.style.animationDelay = '0s';
+                    prophecyText.appendChild(span);
+                    wordIndex++;
+                    setTimeout(revealNextWord, 150);
+                }
+            }
+            
+            // Start text animation after moon has risen
+            setTimeout(revealNextWord, 6000);
+        }
+
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
-            
-            // Add click handler for Amazon purchase button
-            const amazonBtn = document.querySelector('.amazon-btn');
-            if (amazonBtn) {
-                amazonBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // Ready for actual Amazon link when available
-                    alert('Pre-order will be available May 2025. Check back soon!');
-                });
-            }
+            animateText();
         });
     </script>
 </body>
