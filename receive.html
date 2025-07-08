@@ -157,8 +157,7 @@
 
         .purchase-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            justify-content: center;
             margin: 2rem 0;
         }
 
@@ -166,12 +165,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.2rem 2rem;
+            padding: 1.5rem 3rem;
             background: linear-gradient(135deg, #ff6b35 0%, #d84315 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
@@ -188,18 +187,6 @@
             font-size: 1.2rem;
         }
 
-        .coming-soon {
-            background: rgba(100, 100, 100, 0.3);
-            color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .coming-soon:hover {
-            transform: none;
-            box-shadow: 0 5px 20px rgba(100, 100, 100, 0.2);
-            background: rgba(100, 100, 100, 0.3);
-        }
-
         .availability-info {
             background: rgba(0, 0, 0, 0.4);
             padding: 2rem;
@@ -211,39 +198,6 @@
         .availability-info h3 {
             color: #ff6b35;
             margin-bottom: 1rem;
-        }
-
-        .contact-section {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        .contact-section h2 {
-            color: #ff6b35;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            padding: 1.5rem;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-        }
-
-        .contact-item h4 {
-            color: #ff6b35;
-            margin-bottom: 0.5rem;
         }
 
         .footer-quote {
@@ -274,6 +228,11 @@
                 padding: 1.5rem;
             }
 
+            .purchase-btn {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+            }
+
             .nav-home {
                 position: static;
                 display: inline-block;
@@ -292,7 +251,6 @@
     <header class="header">
         <a href="index.html" class="nav-home">← Return to Home</a>
         <h1 class="page-title">RECEIVE THE WORD</h1>
-        <p class="page-subtitle">Obtain Your Copy of the Prophetic Revelation</p>
     </header>
 
     <main class="main-content">
@@ -319,46 +277,13 @@
                         <i>📚</i>
                         Order on Amazon - Coming Soon
                     </a>
-                    
-                    <a href="#" class="purchase-btn coming-soon">
-                        <i>📖</i>
-                        Kindle Edition - Coming Soon
-                    </a>
-                    
-                    <a href="#" class="purchase-btn coming-soon">
-                        <i>🎧</i>
-                        Audio Edition - Coming Soon
-                    </a>
                 </div>
 
                 <div class="availability-info">
                     <h3>Availability Timeline</h3>
-                    <p><strong>Pre-Order:</strong> Available January 2025</p>
-                    <p><strong>Official Release:</strong> February 2025</p>
-                    <p><strong>Digital Formats:</strong> March 2025</p>
+                    <p><strong>Pre-Order:</strong> Available May 2025</p>
+                    <p><strong>Official Release:</strong> July 21, 2025</p>
                     <p>Be among the first to receive this prophetic revelation as the appointed time approaches.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-section">
-            <h2>Stay Connected</h2>
-            <p>For updates on release dates, special editions, and related announcements</p>
-            
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h4>Release Updates</h4>
-                    <p>Join our mailing list for immediate notification when the book becomes available for purchase.</p>
-                </div>
-                
-                <div class="contact-item">
-                    <h4>Bulk Orders</h4>
-                    <p>Churches, study groups, and organizations interested in quantity discounts, please inquire.</p>
-                </div>
-                
-                <div class="contact-item">
-                    <h4>Media Inquiries</h4>
-                    <p>Press, podcast, and interview requests welcome for discussing the prophetic revelations.</p>
                 </div>
             </div>
         </section>
@@ -390,19 +315,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
             
-            // Add click handlers for purchase buttons
-            const purchaseButtons = document.querySelectorAll('.purchase-btn');
-            purchaseButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.classList.contains('coming-soon')) {
-                        e.preventDefault();
-                        alert('This format will be available soon. Check back for updates!');
-                    } else if (this.classList.contains('amazon-btn')) {
-                        e.preventDefault();
-                        alert('Amazon link will be activated when the book is available for pre-order.');
-                    }
+            // Add click handler for Amazon purchase button
+            const amazonBtn = document.querySelector('.amazon-btn');
+            if (amazonBtn) {
+                amazonBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Amazon link will be activated when the book is available for pre-order.');
                 });
-            });
+            }
         });
     </script>
 </body>
